@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ReleaseTests-MultTiming:
+  Pylops_Cupy_Testing:
     runs-on: self-hosted
     steps:
       - name: Checkout code
@@ -16,7 +16,7 @@ jobs:
           echo $(which python3)
           echo $(which pip3)
       - name: Run Install
-        run: pip --upgrade --force-reinstall .
+        run: pip install --upgrade --force-reinstall .
       - name: Run Numpy Test 
         env:
           OMP_NUM_THREADS: 32
