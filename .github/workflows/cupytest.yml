@@ -23,7 +23,16 @@ jobs:
           CUPY_PYLOPS: 0
           TEST_CUPY_PYLOPS: 0
         run: |
-          srun -t 00:30:00 -N 1 -n 4 -c 64 --cpu-bind=cores \
+          srun -t 00:30:00 -N 1 -n 1 -c 64 --cpu-bind=cores \
           -q interactive -C cpu \
+          pytest pytests/test_basicoperators.py
+      - name: Run Cupy Test 
+        env:
+          OMP_NUM_THREADS: 32
+          CUPY_PYLOPS: 1
+          TEST_CUPY_PYLOPS: 1
+        run: |
+          srun -t 00:30:00 -N 1 -n 1 -c 64 --cpu-bind=cores \
+          -q interactive -C gpu --gpus 1 --account=m4293_g \
           pytest pytests/test_basicoperators.py
     
