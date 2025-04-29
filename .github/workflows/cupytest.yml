@@ -1,0 +1,29 @@
+name: Cupy Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ReleaseTests-MultTiming:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Print checked code and check environments
+        run: |
+          ls -lah
+          echo $(pwd)
+          echo $(which python3)
+          echo $(which pip3)
+      - name: Run Install
+        run: pip --upgrade --force-reinstall .
+      - name: Run Numpy Test 
+        env:
+          OMP_NUM_THREADS: 32
+          CUPY_PYLOPS: 0
+          TEST_CUPY_PYLOPS: 0
+        run: |
+          srun -t 00:30:00 -N 1 -n 4 -c 64 --cpu-bind=cores \
+          -q interactive -C cpu \
+          pytest pytests/test_basicoperators.py
+    
