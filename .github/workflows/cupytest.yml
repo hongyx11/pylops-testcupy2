@@ -31,7 +31,7 @@ jobs:
         run: |
           srun -t 00:30:00 -N 1 -n 1 -c 64 --cpu-bind=cores \
           -q interactive -C cpu \
-          pytest
+          pytest pytests/test_basicoperators.py
       - name: Run Cupy Test 
         env:
           OMP_NUM_THREADS: 32
@@ -40,5 +40,5 @@ jobs:
         run: |
           srun -t 00:30:00 -N 1 -n 1 -c 64 --cpu-bind=cores \
           -q interactive -C gpu --gpus 1 --account=m4293_g \
-          pytest pytests/test_basicoperators.py
+          pytest 
     
