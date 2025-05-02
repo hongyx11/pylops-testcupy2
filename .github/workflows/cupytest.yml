@@ -31,7 +31,7 @@ jobs:
         run: |
           srun -t 00:30:00 -N 1 -n 1 -c 64 --cpu-bind=cores \
           -q interactive -C cpu \
-          pytest pytests/test_basicoperators.py
+          pytest
       - name: Run Cupy Test 
         env:
           OMP_NUM_THREADS: 32
