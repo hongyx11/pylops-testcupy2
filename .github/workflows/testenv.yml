@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Pylops_Cupy_Testing:
+  Python_Environment_Testing:
     runs-on: self-hosted
     steps:
       - name: Checkout code
