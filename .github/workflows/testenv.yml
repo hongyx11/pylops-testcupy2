@@ -26,8 +26,10 @@ jobs:
           pip install -r requirements-dev-gpu.txt
       - name: Install pylops
         run: |
+          source .venv/bin/activate 
           python -m setuptools_scm
           pip install .
       - name: pytest 
         run: |
+          source .venv/bin/activate 
           pytest
