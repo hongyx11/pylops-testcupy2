@@ -21,3 +21,7 @@ jobs:
           source .venv/bin/activate 
           echo $(which python3)
           echo $(which pip3)
+      - name: install pylops dependencies
+        run: |
+          echo $(which python3)
+          echo $(which pip3)
