@@ -1,0 +1,17 @@
+name: Cupy Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Pylops_Cupy_Testing:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Print checked code and check environments
+        run: |
+          ls -lah
+          echo $(pwd)
+          echo $(which python3)
+          echo $(which pip3)
