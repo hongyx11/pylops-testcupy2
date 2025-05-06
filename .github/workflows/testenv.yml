@@ -22,7 +22,7 @@ jobs:
           echo $(which python3)
           echo $(which pip3)
           python -m pip install --upgrade pip setuptools
-          pip install flake8 pytest
+          pip install flake8 pytest setuptools-scm
           pip install -r requirements-dev-gpu.txt
       - name: Install pylops
         run: |
