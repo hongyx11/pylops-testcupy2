@@ -15,14 +15,19 @@ jobs:
           echo $(pwd)
           echo $(which python3)
           echo $(which pip3)
-      - name: create new virtual environment 
+      - name: create new virtual environment and install dependencies
         run: |
           python -m venv .venv 
           source .venv/bin/activate 
           echo $(which python3)
           echo $(which pip3)
-      - name: install pylops dependencies
+          python -m pip install --upgrade pip setuptools
+          pip install flake8 pytest
+          pip install -r requirements-dev-gpu.txt
+      - name: Install pylops
         run: |
-          source .venv/bin/activate 
-          echo $(which python3)
-          echo $(which pip3)
+          python -m setuptools_scm
+          pip install .
+      - name: pytest 
+        run: |
+          pytest
