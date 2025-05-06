@@ -1,0 +1,37 @@
+name: Cupy Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Pylops_Cupy_Testing:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Print checked code and check environments
+        run: |
+          ls -lah
+          echo $(pwd)
+          echo $(which python3)
+          echo $(which pip3)
+          echo $(nvcc --version)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools
+          pip install flake8 pytest
+          pip install -r requirements-dev-gpu.txt
+      - name: Install pylops
+      run: |
+        python -m setuptools_scm
+        pip install .
+      - name: Run Cupy Test 
+        env:
+          OMP_NUM_THREADS: 32
+          CUPY_PYLOPS: 1
+          TEST_CUPY_PYLOPS: 1
+        run: |
+          srun -t 00:30:00 -N 1 -n 1 -c 64 --cpu-bind=cores \
+          -q interactive -C gpu --gpus 1 --account=m4293_g \
+          pytest 
+    
