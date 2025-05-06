@@ -1,4 +1,4 @@
-name: Cupy Test
+name: Python Environment Test
 
 on:
   workflow_dispatch:
